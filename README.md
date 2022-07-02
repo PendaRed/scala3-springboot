@@ -24,8 +24,7 @@ $ sbt compile
 ### Database
 By default the service expects there to be a local instance of PostgreSQL running with the `postgres` user available.
 
-The main entry point of the service is `MainController`, see the file
-(MainController.scala)[src/main/scala/com/jgibbons/scala3springboot/MainController.scala]
+The main entry point of the service is `src/main/scala/com/jgibbons/scala3springboot/MainController.scala`
 
 Once you launch the service, it will be listening on port 8080 by default.
 
