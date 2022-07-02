@@ -1,8 +1,8 @@
 package com.jgibbons.scala3springboot
 
-import com.jgibbons.scala3springboot.jpa.{GameMapDesignDbDto, GameMapRepository}
-import org.springframework.http.{HttpStatus, ResponseEntity}
-import org.springframework.web.bind.annotation.{GetMapping, RequestMapping, RequestParam, RestController}
+import com.jgibbons.scala3springboot.jpa.{ GameMapDesignDbDto, GameMapRepository }
+import org.springframework.http.{ HttpStatus, ResponseEntity }
+import org.springframework.web.bind.annotation.{ GetMapping, PostMapping, RequestBody, RequestMapping, RequestParam, RestController }
 
 @RestController
 class HelloRestController(gameRepository: GameMapRepository)  {
@@ -11,7 +11,11 @@ class HelloRestController(gameRepository: GameMapRepository)  {
     s"Hello $name"
 
   @GetMapping(value = Array("/games"))
-  def getGames(): ResponseEntity[java.util.List[GameMapDesignDbDto]] =
+  def getGames: ResponseEntity[java.util.List[GameMapDesignDbDto]] =
     val games = gameRepository.findAll()
     new ResponseEntity[java.util.List[GameMapDesignDbDto]](games, HttpStatus.OK)
+
+  @PostMapping(value = Array("/game"))
+  def addGame(@RequestBody gameMapDesignDbDto: GameMapDesignDbDto): Unit =
+    gameRepository.save(gameMapDesignDbDto)
 }
